@@ -1,14 +1,14 @@
 package com.example.sprint.controller;
 
+import com.example.sprint.dto.AuthorReqDTO;
 import com.example.sprint.exception.HttpResponse;
 import com.example.sprint.service.AuthorService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @RestController
@@ -20,6 +20,12 @@ public class AuthorController {
 
     public AuthorController(AuthorService authorService){
         this.authorService = authorService;
+    }
+
+    @PostMapping("")
+    @ApiOperation(value = "저자 생성", notes = "")
+    public ResponseEntity<HttpResponse> authorAdd(@Valid @RequestBody AuthorReqDTO authorReqDTO){
+        return HttpResponse.toResponseEntity(authorService.addAuthor(authorReqDTO));
     }
 
     @GetMapping("/{id}")

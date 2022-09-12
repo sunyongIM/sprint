@@ -34,7 +34,7 @@ public class Book {
     @Column(nullable = false)
     private LocalDate publishDate;
 
-    private Double price;
+    private Float price;
 
     @Enumerated(value = EnumType.STRING)
     private Currency currency;
@@ -43,7 +43,7 @@ public class Book {
     private List<Author> authors;
 
     @Builder
-    public Book(String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Double price, Currency currency) {
+    public Book(String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Float price, Currency currency) {
         this.title = title;
         this.discontinued = discontinued;
         this.isbn = isbn;

@@ -8,7 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
+    @Query(value = "SELECT * FROM book ORDER BY id", nativeQuery = true)
+    PageImpl<Book> findAllOrderById(Pageable pageable);
+
     @Query(value = "SELECT * FROM book ORDER BY publish_date DESC", nativeQuery = true)
-    PageImpl<Book> findAll(Pageable pageable);
+    PageImpl<Book> findAllOrderByPublishDate(Pageable pageable);
 
 }

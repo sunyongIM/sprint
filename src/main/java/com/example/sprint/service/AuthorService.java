@@ -1,10 +1,14 @@
 package com.example.sprint.service;
 
+import com.example.sprint.dto.AuthorReqDTO;
 import com.example.sprint.dto.AuthorResDTO;
 import com.example.sprint.entity.Author;
 import com.example.sprint.exception.CustomException;
 import com.example.sprint.exception.DataResponseCode;
+import com.example.sprint.exception.ResponseCode;
 import com.example.sprint.repository.AuthorRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -23,6 +27,14 @@ public class AuthorService {
         this.authorRepository = authorRepository;
     }
 
+//    @CacheEvict(value = "authorCache", key = "#authorReqDTO.name")
+    public ResponseCode addAuthor(AuthorReqDTO authorReqDTO) throws CustomException {
+
+
+        return SUCCESS;
+    }
+
+//    @Cacheable(value = "authorCache", key = "#id")  // 저자 삭제 또는 수정 로직이 없어 CacheEvict 를 따로 정의하진 않음
     public DataResponseCode getAuthorById(Long id) throws CustomException {
         HashMap<String, AuthorResDTO> authorHashMap = new HashMap<>();
         Author author = authorRepository.findById(id).orElseThrow(
@@ -33,7 +45,8 @@ public class AuthorService {
         return new DataResponseCode(SUCCESS, authorHashMap);
     }
 
-    // 저자가 동명이인인 경우엔 다시 찾는 과정을 거침
+    // TODO 저자가 동명이인인 경우엔 - 생일이나 프로필로 다시 선택하는 과정을 거쳐야 함
+//    @Cacheable(value = "authorCache", key = "#name")
     public DataResponseCode getAuthorByName(String name) throws CustomException {
         HashMap<String, List<AuthorResDTO>> authorHashMap = new HashMap<>();
         List<Author> authorList = authorRepository.findAllByName(name);
