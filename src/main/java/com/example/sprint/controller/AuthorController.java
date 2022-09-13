@@ -23,7 +23,7 @@ public class AuthorController {
     }
 
     @PostMapping("")
-    @ApiOperation(value = "저자 생성", notes = "")
+    @ApiOperation(value = "저자 등록", notes = "")
     public ResponseEntity<HttpResponse> authorAdd(@RequestBody @Valid AuthorReqDTO authorReqDTO) {
         return HttpResponse.toResponseEntity(authorService.addAuthor(authorReqDTO));
     }

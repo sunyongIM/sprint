@@ -25,7 +25,7 @@ public class BookController {
     }
 
     @PostMapping("")
-    @ApiOperation(value = "도서 생성", notes = "")
+    @ApiOperation(value = "도서 등록", notes = "")
     public ResponseEntity<HttpResponse> authorAdd(@RequestBody @Valid BookReqDTO bookReqDTO) {
         return HttpResponse.toResponseEntity(bookService.addBook(bookReqDTO));
     }

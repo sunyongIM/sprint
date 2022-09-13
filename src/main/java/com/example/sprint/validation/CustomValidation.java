@@ -1,7 +1,5 @@
 package com.example.sprint.validation;
 
-import org.springframework.validation.FieldError;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;
