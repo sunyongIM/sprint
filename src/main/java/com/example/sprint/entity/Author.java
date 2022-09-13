@@ -28,8 +28,9 @@ public class Author {
     private Book book;
 
     @Builder
-    public Author(String name, LocalDate birth){
+    public Author(String name, LocalDate birth, Book book){
         this.name = name;
         this.birth = birth;
+        this.book = book;
     }
 }

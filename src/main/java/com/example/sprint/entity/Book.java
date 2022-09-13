@@ -44,7 +44,8 @@ public class Book {
     private List<Author> authors;
 
     @Builder
-    public Book(String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Double price, Currency currency) {
+    public Book(Long id, String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Double price, Currency currency) {
+        this.id = id;
         this.title = title;
         this.discontinued = discontinued;
         this.isbn = isbn;
