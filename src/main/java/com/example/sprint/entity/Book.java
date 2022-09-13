@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -34,7 +35,7 @@ public class Book {
     @Column(nullable = false)
     private LocalDate publishDate;
 
-    private Float price;
+    private Double price;
 
     @Enumerated(value = EnumType.STRING)
     private Currency currency;
@@ -43,7 +44,7 @@ public class Book {
     private List<Author> authors;
 
     @Builder
-    public Book(String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Float price, Currency currency) {
+    public Book(String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Double price, Currency currency) {
         this.title = title;
         this.discontinued = discontinued;
         this.isbn = isbn;

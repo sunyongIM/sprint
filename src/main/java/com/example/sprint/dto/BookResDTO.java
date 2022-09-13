@@ -11,13 +11,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
 @NoArgsConstructor
+@Getter
 public class BookResDTO {
 
     private Long id;
     private String title;
-    private Boolean discontinued = false;
+    private Boolean discontinued;
     private String isbn;
     private Long pages;
     private LocalDate publishDate;

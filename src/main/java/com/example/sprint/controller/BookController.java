@@ -20,25 +20,25 @@ public class BookController {
 
     private final BookService bookService;
 
-    public BookController(BookService bookService){
+    public BookController(BookService bookService) {
         this.bookService = bookService;
     }
 
     @PostMapping("")
     @ApiOperation(value = "도서 생성", notes = "")
-    public ResponseEntity<HttpResponse> authorAdd(@Valid @RequestBody BookReqDTO bookReqDTO){
+    public ResponseEntity<HttpResponse> authorAdd(@RequestBody @Valid BookReqDTO bookReqDTO) {
         return HttpResponse.toResponseEntity(bookService.addBook(bookReqDTO));
     }
 
     @GetMapping()
     @ApiOperation(value = "Book 전체 조회", notes = "Paging 적용 (size 10, index 1 부터 시작), default order => 최신 발간년도")
-    public ResponseEntity<HttpResponse> bookList(@PageableDefault(value = 10) Pageable pageable){
+    public ResponseEntity<HttpResponse> bookList(@PageableDefault(value = 10) Pageable pageable) {
         return HttpResponse.toResponseEntity(bookService.getBooks(pageable));
     }
 
     @GetMapping(params = {"order_by"})
     @ApiOperation(value = "Book 전체 조회", notes = "Paging 적용 (size 10, index 1 부터 시작), 정렬 종류 => ORDER_BY_ID, ORDER_BY_PUBLISH_DATE")
-    public ResponseEntity<HttpResponse> bookList(@PageableDefault(value = 10) Pageable pageable, @RequestParam("order_by") BooksOrderBy booksOrderBy){
+    public ResponseEntity<HttpResponse> bookList(@PageableDefault(value = 10) Pageable pageable, @RequestParam("order_by") BooksOrderBy booksOrderBy) {
         return HttpResponse.toResponseEntity(bookService.getBooks(pageable, booksOrderBy));
     }
 

@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +30,9 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
+    @Transactional
     public ResponseCode addBook(BookReqDTO bookReqDTO) throws CustomException {
-
-
+        bookRepository.save(bookReqDTO.toEntity());
         return SUCCESS;
     }
 
@@ -41,6 +42,7 @@ public class BookService {
         return new DataResponseCode(SUCCESS, pageToMap(books));
     }
 
+    // TODO 정렬의 조건이 다양해지면 QueryDsl 사용
     public DataResponseCode getBooks(Pageable pageable, BooksOrderBy booksOrderBy){
         PageImpl<Book> books;
 

@@ -18,19 +18,19 @@ public class AuthorController {
 
     private final AuthorService authorService;
 
-    public AuthorController(AuthorService authorService){
+    public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
     }
 
     @PostMapping("")
     @ApiOperation(value = "저자 생성", notes = "")
-    public ResponseEntity<HttpResponse> authorAdd(@Valid @RequestBody AuthorReqDTO authorReqDTO){
+    public ResponseEntity<HttpResponse> authorAdd(@RequestBody @Valid AuthorReqDTO authorReqDTO) {
         return HttpResponse.toResponseEntity(authorService.addAuthor(authorReqDTO));
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "id로 저자 찾기", notes = "Path Variable 이용")
-    public ResponseEntity<HttpResponse> authorGet(@PathVariable Long id){
+    public ResponseEntity<HttpResponse> authorGet(@PathVariable Long id) {
         return HttpResponse.toResponseEntity(authorService.getAuthorById(id));
     }
 

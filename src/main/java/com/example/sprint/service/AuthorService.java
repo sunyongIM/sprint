@@ -11,6 +11,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,9 +29,9 @@ public class AuthorService {
     }
 
 //    @CacheEvict(value = "authorCache", key = "#authorReqDTO.name")
+    @Transactional
     public ResponseCode addAuthor(AuthorReqDTO authorReqDTO) throws CustomException {
-
-
+        authorRepository.save(authorReqDTO.toEntity());
         return SUCCESS;
     }
 

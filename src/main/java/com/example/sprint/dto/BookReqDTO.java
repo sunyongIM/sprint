@@ -2,43 +2,45 @@ package com.example.sprint.dto;
 
 import com.example.sprint.entity.Book;
 import com.example.sprint.enums.Currency;
+import com.example.sprint.validation.CustomValidation;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.ISBN;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
+@NoArgsConstructor
+@Getter
+@CustomValidation
 public class BookReqDTO {
 
     @NotBlank(message = "TITLE_NECESSARY")
     @Size(max = 255, message = "TITLE_TOO_LONG")
     private String title;
 
-    @NotBlank(message = "DISCONTINUED_NECESSARY")
+//    @NotBlank(message = "DISCONTINUED_NECESSARY")
     private Boolean discontinued;
 
     @NotBlank(message = "ISBN_NECESSARY")
     @ISBN(message = "ISBN_NOT_VALID")
     private String isbn;
 
-    @NotBlank(message = "PAGES_NECESSARY")
+    @NotNull(message = "PAGES_NECESSARY")
     private Long pages;
 
-    @NotBlank(message = "PUBLISH_DATE_NECESSARY")
+    @NotNull(message = "PUBLISH_DATE_NECESSARY")
     @PastOrPresent(message = "PUBLISH_DATE_NOT_VALID")
     private LocalDate publishDate;
 
-    @Digits(integer = 0, fraction = 2)
-    private Float price;
-
+    @Digits(integer = 300, fraction = 2)
+    private Double price;
 
     private Currency currency;
 
     @Builder
-    public BookReqDTO(String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Float price, Currency currency) {
+    public BookReqDTO(String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Double price, Currency currency) {
         this.title = title;
         this.discontinued = discontinued;
         this.isbn = isbn;
@@ -48,6 +50,7 @@ public class BookReqDTO {
         this.currency = currency;
     }
 
+    // 해당 메서드 대신 @ISBN Validation 사용
     public boolean checkIsbn() {
         String isbnString = this.isbn.replace("-", "");
         int sum = 0;
@@ -64,9 +67,13 @@ public class BookReqDTO {
     }
 
     public Book toEntity() {
+        Boolean discontinuedDefault = this.discontinued;
+        if (discontinuedDefault == null){
+            discontinuedDefault = false;
+        }
         return Book.builder()
                 .title(this.title)
-                .discontinued(this.discontinued)
+                .discontinued(discontinuedDefault)
                 .isbn(this.isbn)
                 .pages(this.pages)
                 .publishDate(this.publishDate)
