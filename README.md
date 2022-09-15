@@ -60,4 +60,9 @@
   
 ![image](https://user-images.githubusercontent.com/91590293/190296566-0d3c041d-eb5a-4eac-ab03-b45781b94a46.png)
 
+### 변경
   
+  - 저자, 공동저자 동시 등록
+  
+![image](https://user-images.githubusercontent.com/91590293/190301312-f96f49c9-876d-40ea-a6eb-8a1583fb36fe.png)
+
