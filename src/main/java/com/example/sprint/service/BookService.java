@@ -30,11 +30,11 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    @Transactional
-    public ResponseCode addBook(BookReqDTO bookReqDTO) throws CustomException {
-        bookRepository.save(bookReqDTO.toEntity());
-        return SUCCESS;
-    }
+//    @Transactional
+//    public ResponseCode addBook(BookReqDTO bookReqDTO) throws CustomException {
+//        bookRepository.save(bookReqDTO.toEntity());
+//        return SUCCESS;
+//    }
 
     public DataResponseCode getBooks(Pageable pageable){
         PageImpl<Book> books = bookRepository.findAllOrderById(pageable);

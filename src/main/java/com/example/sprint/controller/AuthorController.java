@@ -22,11 +22,11 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    @PostMapping("")
-    @ApiOperation(value = "저자 등록", notes = "")
-    public ResponseEntity<HttpResponse> authorAdd(@RequestBody @Valid AuthorReqDTO authorReqDTO) {
-        return HttpResponse.toResponseEntity(authorService.addAuthor(authorReqDTO));
-    }
+//    @PostMapping("")
+//    @ApiOperation(value = "저자 등록", notes = "")
+//    public ResponseEntity<HttpResponse> authorAdd(@RequestBody @Valid AuthorReqDTO authorReqDTO) {
+//        return HttpResponse.toResponseEntity(authorService.addAuthor(authorReqDTO));
+//    }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "id로 저자 찾기", notes = "Path Variable 이용")

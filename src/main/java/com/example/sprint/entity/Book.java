@@ -5,7 +5,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -41,7 +40,7 @@ public class Book {
     private Currency currency;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
-    private List<Author> authors;
+    private List<Register> registerList;
 
     @Builder
     public Book(Long id, String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Double price, Currency currency) {

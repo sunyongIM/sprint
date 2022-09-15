@@ -1,6 +1,5 @@
 package com.example.sprint.dto;
 
-import com.example.sprint.entity.Author;
 import com.example.sprint.entity.Book;
 import com.example.sprint.enums.Currency;
 import lombok.Builder;
@@ -48,7 +47,7 @@ public class BookResDTO {
         this.publishDate = book.getPublishDate();
         this.price = book.getPrice();
         this.currency = book.getCurrency();
-        this.authors = book.getAuthors().stream().map(Author::getName).collect(Collectors.toList());
+        this.authors = book.getRegisterList().stream().map(authorBook -> authorBook.getAuthor().getName()).collect(Collectors.toList());
     }
 
 }

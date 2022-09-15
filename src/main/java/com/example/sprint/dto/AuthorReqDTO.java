@@ -24,20 +24,16 @@ public class AuthorReqDTO {
     @PastOrPresent(message = "BIRTH_NOT_VALID")
     private LocalDate birth;
 
-    private Long bookId;
-
     @Builder
-    public AuthorReqDTO(String name, LocalDate birth, Long bookId) {
+    public AuthorReqDTO(String name, LocalDate birth) {
         this.name = name;
         this.birth = birth;
-        this.bookId = bookId;
     }
 
     public Author toEntity() {
         return Author.builder()
                 .name(this.name)
                 .birth(this.birth)
-                .book(Book.builder().id(this.bookId).build())
                 .build();
     }
 
