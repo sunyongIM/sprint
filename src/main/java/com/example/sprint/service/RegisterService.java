@@ -1,5 +1,6 @@
 package com.example.sprint.service;
 
+import com.example.sprint.dto.AuthorReqDTO;
 import com.example.sprint.dto.RegisterDTO;
 import com.example.sprint.entity.Author;
 import com.example.sprint.entity.Book;
@@ -12,6 +13,9 @@ import com.example.sprint.repository.RegisterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.example.sprint.exception.ResponseCode.SUCCESS;
 
 @Service
@@ -21,18 +25,26 @@ public class RegisterService {
     private final BookRepository bookRepository;
     private final RegisterRepository registerRepository;
 
-//    @CacheEvict(value = "authorCache", key = "#registerDTO.authorReqDTO.name")
+    //    @CacheEvict(value = "authorCache", key = "#registerDTO.authorReqDTO.name")
     public ResponseCode register(RegisterDTO registerDTO) throws CustomException {
-        Author author = registerDTO.getAuthor().toEntity();
+        List<Author> authors = registerDTO.getAuthors().stream().map(AuthorReqDTO::toEntity).collect(Collectors.toList());
         Book book = registerDTO.getBook().toEntity();
-
-        Long authorId = authorRepository.save(author).getId();
         Long bookId = bookRepository.save(book).getId();
 
-        registerRepository.save(Register.builder()
-                .author(Author.builder().id(authorId).build())
-                .book(Book.builder().id(bookId).build())
-                .build());
+        for (Author author : authors) {
+            Long authorId;
+
+            Author existAuthor = authorRepository.findByNameAndBirth(author.getName(), author.getBirth()).orElse(
+                   authorRepository.save(author)
+            );
+
+            authorId = existAuthor.getId();
+
+            registerRepository.save(Register.builder()
+                    .author(Author.builder().id(authorId).build())
+                    .book(Book.builder().id(bookId).build())
+                    .build());
+        }
 
         return SUCCESS;
     }
