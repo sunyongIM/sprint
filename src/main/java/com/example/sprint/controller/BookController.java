@@ -24,11 +24,11 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @PostMapping("")
-    @ApiOperation(value = "도서 등록", notes = "")
-    public ResponseEntity<HttpResponse> authorAdd(@RequestBody @Valid BookReqDTO bookReqDTO) {
-        return HttpResponse.toResponseEntity(bookService.addBook(bookReqDTO));
-    }
+//    @PostMapping("")
+//    @ApiOperation(value = "도서 등록", notes = "")
+//    public ResponseEntity<HttpResponse> authorAdd(@RequestBody @Valid BookReqDTO bookReqDTO) {
+//        return HttpResponse.toResponseEntity(bookService.addBook(bookReqDTO));
+//    }
 
     @GetMapping()
     @ApiOperation(value = "Book 전체 조회", notes = "Paging 적용 (size 10, index 1 부터 시작), default order => 최신 발간년도")

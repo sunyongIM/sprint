@@ -29,11 +29,11 @@ public class AuthorService {
     }
 
 //    @CacheEvict(value = "authorCache", key = "#authorReqDTO.name")
-    @Transactional
-    public ResponseCode addAuthor(AuthorReqDTO authorReqDTO) throws CustomException {
-        authorRepository.save(authorReqDTO.toEntity());
-        return SUCCESS;
-    }
+//    @Transactional
+//    public ResponseCode addAuthor(AuthorReqDTO authorReqDTO) throws CustomException {
+//        authorRepository.save(authorReqDTO.toEntity());
+//        return SUCCESS;
+//    }
 
 //    @Cacheable(value = "authorCache", key = "#id")  // 저자 삭제 또는 수정 로직이 없어 CacheEvict 를 따로 정의하진 않음
     public DataResponseCode getAuthorById(Long id) throws CustomException {

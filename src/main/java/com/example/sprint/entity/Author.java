@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,14 +24,13 @@ public class Author {
     @Column(nullable = false)
     private LocalDate birth;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id")
-    private Book book;
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+    private List<Register> registerList;
 
     @Builder
-    public Author(String name, LocalDate birth, Book book){
+    public Author(Long id, String name, LocalDate birth){
+        this.id = id;
         this.name = name;
         this.birth = birth;
-        this.book = book;
     }
 }
