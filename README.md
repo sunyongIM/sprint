@@ -51,3 +51,13 @@
     - Data가 존재하는 응답과 존재하지 않는 응답 통일
       - Data가 존재하지 않는 응답은 해당 key의 value가 null (필요시 수정 가능)
   
+
+## 수정
+
+  - 저자 및 도서 등록방식
+    - 저자 Entity와 도서 Entity를 ManyToMany 연관관계로 설정하기 위해 Register Entity 생성
+    - 도서를 등록하고 그 도서에 맞는 저자를 저장하는 방식보다 저자와 도서를 동시에 등록하는 것이 효율적일 것이라 생각 됨
+  
+![image](https://user-images.githubusercontent.com/91590293/190296566-0d3c041d-eb5a-4eac-ab03-b45781b94a46.png)
+
+  
