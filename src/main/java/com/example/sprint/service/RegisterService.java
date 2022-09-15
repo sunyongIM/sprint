@@ -1,6 +1,7 @@
 package com.example.sprint.service;
 
 import com.example.sprint.dto.AuthorReqDTO;
+import com.example.sprint.dto.BookReqDTO;
 import com.example.sprint.dto.RegisterDTO;
 import com.example.sprint.entity.Author;
 import com.example.sprint.entity.Book;
@@ -13,6 +14,8 @@ import com.example.sprint.repository.RegisterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,16 +29,19 @@ public class RegisterService {
     private final RegisterRepository registerRepository;
 
     //    @CacheEvict(value = "authorCache", key = "#registerDTO.authorReqDTO.name")
+    @Transactional
     public ResponseCode register(RegisterDTO registerDTO) throws CustomException {
+
         List<Author> authors = registerDTO.getAuthors().stream().map(AuthorReqDTO::toEntity).collect(Collectors.toList());
         Book book = registerDTO.getBook().toEntity();
+
         Long bookId = bookRepository.save(book).getId();
 
         for (Author author : authors) {
             Long authorId;
 
-            Author existAuthor = authorRepository.findByNameAndBirth(author.getName(), author.getBirth()).orElse(
-                   authorRepository.save(author)
+            Author existAuthor = authorRepository.findByNameAndBirth(author.getName(), author.getBirth()).orElseGet(
+                    ()-> authorRepository.save(author)
             );
 
             authorId = existAuthor.getId();

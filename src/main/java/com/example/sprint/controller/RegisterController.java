@@ -1,5 +1,7 @@
 package com.example.sprint.controller;
 
+import com.example.sprint.dto.AuthorReqDTO;
+import com.example.sprint.dto.BookReqDTO;
 import com.example.sprint.dto.RegisterDTO;
 import com.example.sprint.exception.HttpResponse;
 import com.example.sprint.service.RegisterService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Api(tags = "저자-도서 등록 API")

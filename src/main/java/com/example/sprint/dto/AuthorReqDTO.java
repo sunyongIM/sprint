@@ -1,7 +1,6 @@
 package com.example.sprint.dto;
 
 import com.example.sprint.entity.Author;
-import com.example.sprint.entity.Book;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

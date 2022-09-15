@@ -4,14 +4,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @NoArgsConstructor
 @Getter
 public class RegisterDTO {
 
-    private List<AuthorReqDTO> authors;
-    private BookReqDTO book;
+    private List<@Valid AuthorReqDTO> authors;
+    private @Valid BookReqDTO book;
 
     @Builder
     public RegisterDTO(List<AuthorReqDTO> authorReqDTOList, BookReqDTO bookReqDTO){
