@@ -41,10 +41,10 @@ public class BookReqDTO {
     private Double price;
 
     @CurrencyValidation(currency = Currency.class)
-    private Currency currency;
+    private String currency;
 
     @Builder
-    public BookReqDTO(String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Double price, Currency currency) {
+    public BookReqDTO(String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Double price, String currency) {
         this.title = title;
         this.discontinued = discontinued;
         this.isbn = isbn;
@@ -71,6 +71,7 @@ public class BookReqDTO {
     }
 
     public Book toEntity() {
+        Currency stringToCurrency = Currency.valueOf(this.currency);
         Boolean discontinuedDefault = this.discontinued;
         if (discontinuedDefault == null){
             discontinuedDefault = false;
@@ -82,7 +83,7 @@ public class BookReqDTO {
                 .pages(this.pages)
                 .publishDate(this.publishDate)
                 .price(this.price)
-                .currency(this.currency)
+                .currency(stringToCurrency)
                 .build();
     }
 
