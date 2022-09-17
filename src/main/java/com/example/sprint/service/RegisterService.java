@@ -1,7 +1,6 @@
 package com.example.sprint.service;
 
 import com.example.sprint.dto.AuthorReqDTO;
-import com.example.sprint.dto.BookReqDTO;
 import com.example.sprint.dto.RegisterDTO;
 import com.example.sprint.entity.Author;
 import com.example.sprint.entity.Book;
@@ -15,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 

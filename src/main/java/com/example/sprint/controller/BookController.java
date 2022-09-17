@@ -1,6 +1,5 @@
 package com.example.sprint.controller;
 
-import com.example.sprint.dto.BookReqDTO;
 import com.example.sprint.enums.BooksOrderBy;
 import com.example.sprint.exception.HttpResponse;
 import com.example.sprint.service.BookService;
@@ -9,9 +8,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Api(tags = "Book API")

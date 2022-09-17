@@ -2,12 +2,15 @@ package com.example.sprint.dto;
 
 import com.example.sprint.entity.Book;
 import com.example.sprint.enums.Currency;
+import com.example.sprint.validation.CurrencyValidation;
 import com.example.sprint.validation.CustomValidation;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.ISBN;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
@@ -37,6 +40,7 @@ public class BookReqDTO {
     @Digits(integer = 300, fraction = 2)
     private Double price;
 
+    @CurrencyValidation(currency = Currency.class)
     private Currency currency;
 
     @Builder
