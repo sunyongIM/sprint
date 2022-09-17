@@ -9,6 +9,7 @@ public class PriceCurrencyValidator implements ConstraintValidator<CustomValidat
 
     @Override
     public void initialize(CustomValidation constraintAnnotation) {
+        ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
