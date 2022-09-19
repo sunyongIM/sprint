@@ -34,6 +34,7 @@ public class Book {
     @Column(nullable = false)
     private LocalDate publishDate;
 
+    @Column(precision = 2)
     private Double price;
 
     @Enumerated(value = EnumType.STRING)
