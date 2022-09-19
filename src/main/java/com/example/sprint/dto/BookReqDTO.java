@@ -2,12 +2,15 @@ package com.example.sprint.dto;
 
 import com.example.sprint.entity.Book;
 import com.example.sprint.enums.Currency;
+import com.example.sprint.validation.CurrencyValidation;
 import com.example.sprint.validation.CustomValidation;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.ISBN;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
@@ -37,10 +40,11 @@ public class BookReqDTO {
     @Digits(integer = 300, fraction = 2)
     private Double price;
 
-    private Currency currency;
+    @CurrencyValidation(currency = Currency.class)
+    private String currency;
 
     @Builder
-    public BookReqDTO(String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Double price, Currency currency) {
+    public BookReqDTO(String title, Boolean discontinued, String isbn, Long pages, LocalDate publishDate, Double price, String currency) {
         this.title = title;
         this.discontinued = discontinued;
         this.isbn = isbn;
@@ -67,6 +71,7 @@ public class BookReqDTO {
     }
 
     public Book toEntity() {
+        Currency stringToCurrency = Currency.valueOf(this.currency);
         Boolean discontinuedDefault = this.discontinued;
         if (discontinuedDefault == null){
             discontinuedDefault = false;
@@ -78,7 +83,7 @@ public class BookReqDTO {
                 .pages(this.pages)
                 .publishDate(this.publishDate)
                 .price(this.price)
-                .currency(this.currency)
+                .currency(stringToCurrency)
                 .build();
     }
 
